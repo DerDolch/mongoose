@@ -1,0 +1,24 @@
+%h2 Master User List
+
+%table{'cellpadding'=>'0', 'cellspacing'=>'0'}
+  %thead
+    %tr
+      %td Username
+      %td First Name
+      %td Last Name
+      %td Email Address
+      %td Updated At
+      %td{'colspan'=>'3'} Created At
+
+      
+  %tbody
+    - for user in @users
+      %tr{:class => cycle("alt_even", "alt_odd")}
+        %td= user.login
+        %td= user.first_name
+        %td= user.last_name
+        %td= user.email
+        %td= user.updated_at.to_s(:long)
+        %td= user.created_at.to_s(:long)
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Delete', user_path(user), :confirm => "Are you sure you want to delete user: #{user.login} ?", :method => :delete

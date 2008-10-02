@@ -1,0 +1,24 @@
+%h2 New Story
+
+%fieldset
+  %ul
+    - form_for(:story, :url => product_story_path(@product, @story)) do |f|
+      = f.error_messages
+      %li
+        = f.label :title
+        = f.text_field :title
+
+      %li
+        = f.label :effort
+        = f.text_field :effort
+
+      %li
+        = f.label :description
+        = f.text_area :description
+
+      %li
+        = f.label :sprint
+        = collection_select(:story, :sprint_id, @product.sprints, :id, :title, {:include_blank => "Backlog Story"})
+        = f.hidden_field :product_id,  { :value => params[:product_id] }
+        
+      %li= f.submit "Create New Story"

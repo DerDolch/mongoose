@@ -1,0 +1,67 @@
+%h3.breadcrumb
+  = link_to 'Products', products_path
+  = " / "
+  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.product_status.title})", product_path(@product)
+  = " / <span>#{@product.identifier}-#{@story.id}</span>"
+
+%h2= @story.title
+
+%p
+  %strong= "Effort: #{@story.effort}"
+  %br
+  = @story.description
+
+%br
+
+%p
+  = link_to 'New Task', new_product_story_task_path(@product, @story), :id => 'task_link_add'
+  = link_to 'Edit Story', edit_product_story_path(@product, @story), :id => 'story_link_edit'
+  = link_to 'Remove Story', product_story_path(@product, @story), :method => :delete, :confirm => "Are you sure you want to remove \"#{@story.title}\" and associated tasks?", :id => 'story_link_remove'
+
+%br/
+- if @tasks.blank?
+  .clear
+  %h3 No tasks listed for this story.
+- else
+
+  :javascript
+    $(document).ready(function() {      
+      $(".select_change").change(function () {
+                $(".select_change option:selected").each(function () {   
+
+                      var task_id = $(this).parent().attr("id").split('_')[1];
+                      var task_status_id = $(this).val();
+                                            
+                      $.ajax({
+                    		url: "#{@story.id}/tasks/update_task_status",
+                        type: "PUT",
+                  		  data: "task_id=" + task_id + "&task_status_id=" + task_status_id
+                  		})
+                  		
+                    });
+              })
+    });
+
+  %table{'cellpadding' => '0', 'cellspacing' => '0'}
+    %thead
+      %tr
+        %td Task
+        %td Description
+        %td Hours
+        %td{'colspan' => '2'} Status
+    %tbody
+      - for task in @tasks
+        %tr{:class => cycle("alt_even", "alt_odd")}
+          %td= link_to task.title, product_story_task_path(@product, @story, task)
+          %td= task.description
+          %td= task.hours
+          %td
+            %form{'action'=>'task'}
+              %fieldset 
+                = select_tag 'task[task_status_id]', options_from_collection_for_select(@task_statuses, :id, :name, task.task_status.id), :id => "task_#{task.id}", :class => 'select_change'
+          %td
+            = link_to 'Edit', edit_product_story_task_path(@product, @story, task)
+            = "/"
+            = link_to 'Remove', product_story_task_path(@product, @story, task), :confirm => "Are you sure you want to delete \"#{task.title}\"?", :method => :delete
+  
+            

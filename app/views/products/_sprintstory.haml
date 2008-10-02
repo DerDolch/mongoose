@@ -1,0 +1,10 @@
+- sprintstory.each do |sprint|
+  .sprint
+    - stories = Story.find_current_sprint_stories(sprint, @product)
+    = render :partial => 'sprinttitlegoal', :object => sprint
+
+    - if Time.now <= sprint.end_date && sprint.sprint_status.id == 1
+      = render :partial => 'storytable', :object => stories, :locals => { :sprint_id => sprint.id, :sortable => @mode, :table_inline => 'display: table;'}
+    - else
+      = render :partial => 'storytable', :object => stories, :locals => { :sprint_id => sprint.id, :sortable => false, :table_inline => 'display: none;' }
+    %br

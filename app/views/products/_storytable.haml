@@ -1,0 +1,73 @@
+- if sortable == 'sortable'
+
+  :javascript
+    $(document).ready(function() {
+        // Initialise the table
+        $("#sort_table#{sprint_id}").tableDnD({ 
+          onDragClass: "row_highlight",     
+          onDrop: function(table, row) {
+              $.ajax({
+                url: "/products/#{@product.id}/stories/update_order",
+                type: "PUT",
+                data: $.tableDnD.serializeCustom()
+              })
+          }
+        });
+    });
+
+- elsif sortable == 'transferable'
+  
+  :javascript
+    $(document).ready(function() {
+      $(".#{sprint_id}_dragme").draggable({
+        helper: function(){ return $(this).clone().addClass("row_highlight")},
+        opacity: 0.85
+      });
+
+      $("##{sprint_id}_acceptme").droppable({
+      	accept: ".ui-draggable",
+      	drop: function(ev, ui) {
+      		$(this).append(ui.draggable);
+      		$.ajax({
+        		url: "/products/#{@product.id}/stories/update_sprint_assoc",
+            type: "PUT",
+      		  data: "sprint_id=#{sprint_id}&story_id=" + ui.draggable.attr("id").split('_')[1]
+      		})
+      	}
+      });
+      
+    });
+
+- if storytable.blank?
+  %p
+    %strong No Stories Listed.
+- else
+  -if sortable == 'transferable' || sortable == 'sortable' 
+    - where_title = (@mode == 'sortable' ? 'transferable' : 'sortable')
+    = "Lists in <strong>#{@mode.capitalize}</strong> switch to"
+    = link_to where_title.capitalize!, product_path(@product, :mode => @mode == 'sortable' ? :transferable : :sortable)
+    = "-"
+
+  = link_to "Show / Hide Stories", "#", :onclick => "$(this).next().toggle(); return false;"
+
+  %table{'id'=>"sort_table#{sprint_id}", 'cellpadding'=>'0', 'cellspacing'=>'0', 'style'=>table_inline}
+    %thead
+      %tr
+        %th= "Title"
+        %th Description
+        %th{'colspan' => '2'} Effort
+    %tbody{'id' => "#{sprint_id}_acceptme"}
+      - if sortable == 'transferable'
+        %tr{'class' => 'story_dropbox'}
+          %td{'colspan' => '4'} -- Drop Box --
+  
+      - storytable.each do |story|
+        %tr{:class => "#{cycle('alt_even', 'alt_odd')} #{sprint_id}_dragme", :id => "story_#{story.id}"}
+          %td= link_to "[#{@product.identifier}-#{story.id}] #{story.title}", product_story_path(@product, story)
+          %td
+            = story.description
+          %td= story.effort
+          %td
+            = link_to 'Edit', edit_product_story_path(@product, story)
+            = '/'
+            = link_to 'Remove', product_story_path(@product, story), :confirm => "Are you sure you want to remove \"#{story.title}\"?", :method => :delete

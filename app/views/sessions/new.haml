@@ -1,0 +1,19 @@
+%h2 Login In
+
+- form_tag session_path do
+  %ul
+    %li
+      = label_tag 'login'
+      = text_field_tag 'login', @login 
+
+    %li
+      = label_tag 'password'
+      = password_field_tag 'password', nil
+
+    %li
+      %label
+        = check_box_tag 'remember_me', '1', @remember_me
+        Remember Me
+
+    %li= submit_tag 'Log in'
+

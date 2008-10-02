@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+status_one:
+  name: Developer
+
+status_two:
+  name: Manager
+  
+status_three:
+  name: Super Admin

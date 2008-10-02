@@ -1,0 +1,10 @@
+%h3
+  =link_to "#{sprinttitlegoal.title}", product_sprint_path(@product, sprinttitlegoal), :class => 'black'
+  %span.storylink
+    = link_to '(Edit)', edit_product_sprint_path(@product, sprinttitlegoal)
+
+%p
+  %strong
+    = "#{sprinttitlegoal.start_date.to_s(:long)} to #{sprinttitlegoal.end_date.to_s(:long)}"
+  %br
+  = "<strong>Goal:</strong> #{sprinttitlegoal.goal}" unless sprinttitlegoal.goal.empty?

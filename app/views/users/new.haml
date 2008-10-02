@@ -1,0 +1,32 @@
+%h2 Create new user account
+- @user.password = @user.password_confirmation = nil
+
+= error_messages_for :user
+
+%fieldset
+  - form_for :user, :url => users_path do |f|
+    %ul
+      = label_tag 'username'
+      = f.text_field :login
+    %ul
+      = label_tag 'email'
+      = f.text_field :email
+
+    %ul
+      = label_tag 'First Name'
+      = f.text_field :first_name
+
+      %ul
+        = label_tag 'Last Name'
+        = f.text_field :last_name
+
+    %ul
+      = label_tag 'password'
+      = f.password_field :password
+    
+    %ul
+      = label_tag 'password_confirmation', 'Confirm Password'
+      = f.password_field :password_confirmation
+      = f.hidden_field :user_status_id, :value => '1'
+    %ul
+      = submit_tag 'Sign up'

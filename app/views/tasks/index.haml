@@ -1,0 +1,23 @@
+%h2 Complete List of Tasks
+
+- if @tasks.empty?
+  %h3 No tasks in Database
+- else
+  = link_to 'New Task', new_product_story_task_path(@product, @story), :id => "sprint_link_add"
+  %table{'cellpadding'=>'0', 'cellspacing'=>'0'}
+    %thead
+      %tr
+        %th Title
+        %th Description
+        %th Hours
+        %th{'colspan'=>'4'} Status
+    %tbody
+      - for task in @tasks
+        %tr{:class => cycle("alt_even", "alt_odd")}
+          %td=h task.title
+          %td=h task.description
+          %td=h task.hours
+          %td=h task.task_status_id
+          %td= link_to 'Show', product_story_task_path(@product, @story, task)
+          %td= link_to 'Edit', edit_product_story_task_path(@product, @story, task)
+          %td= link_to 'Remove', product_story_task_path(@product, @story, task), :confirm => 'Are you sure?', :method => :delete

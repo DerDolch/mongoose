@@ -1,0 +1,16 @@
+%h3= "Task: #{@task.title}"
+
+%p
+  %strong Description:
+  = @task.description
+
+%p
+  %strong Hours:
+  = @task.hours
+
+%p{'id'=>'task_status'}
+  %strong Status:
+  = @task.task_status.name
+
+= link_to 'Edit', edit_product_story_task_path(@product, @story, @task)
+= link_to 'Back', product_story_path(@product, @story)

@@ -1,0 +1,38 @@
+= error_messages_for :product
+
+%fieldset
+  - form_for @product do |f|
+    %dl#user_select_box
+      %dd.left_user
+        %label Available Users
+        %select{:id => 'select_left', :multiple => 'multiple'}
+          - @users_list.each do |user|
+            %option{:value => "#{user.id}"}= "#{user.first_name} #{user.last_name}"
+      %dd.middle_user
+        %a{:href => '#', :id => 'options_right'} &raquo;
+        %a{:href => '#', :id => 'options_left'} &laquo;
+      %dd.right_user
+        %label Assigned to Product
+        %select{:name => 'product_user[user_id][]', :id => 'select_right', :multiple => 'multiple'}
+          - @users_assigned.each do |user|
+            %option{:value => "#{user.id}"}= "#{user.first_name} #{user.last_name}"
+        %input{:name => 'product_user[product_id]', :type => 'hidden', :value => "#{@product.id}"}
+        
+    %ul
+      %li
+        %label Name
+        = f.text_field(:name)
+        %li
+          = f.label :identifier
+          = f.text_field :identifier, :size => 8
+        %li
+          = f.label :product_status, 'Product Status'
+          = collection_select(:product, :product_status_id, @product_statuses, :id, :title )
+        %li
+          = f.label :description
+          = f.text_area :description
+
+          
+          
+        %li
+          = submit_tag 'Save Changes'
