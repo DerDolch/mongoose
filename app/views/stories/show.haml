@@ -33,11 +33,11 @@
                       var task_status_id = $(this).val();
                                             
                       $.ajax({
-                    		url: "#{@story.id}/tasks/update_task_status",
+                        url: "#{@story.id}/tasks/update_task_status",
                         type: "PUT",
-                  		  data: "task_id=" + task_id + "&task_status_id=" + task_status_id
-                  		})
-                  		
+                        data: "task_id=" + task_id + "&task_status_id=" + task_status_id
+                      })
+                      
                     });
               })
     });

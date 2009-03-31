@@ -11,20 +11,20 @@ describe StoriesController do
       route_for(:controller => "stories", :action => "new", :product_id => '1').should == "/products/1/stories/new"
     end
   
-    it "should map { :controller => 'stories', :action => 'show', :product_id => '1', :id => 1 } to /products/1/stories/1" do
-      route_for(:controller => "stories", :action => "show", :product_id => '1', :id => 1).should == "/products/1/stories/1"
+    it "should map { :controller => 'stories', :action => 'show', :product_id => '1', :id => '1' } to /products/1/stories/1" do
+      route_for(:controller => "stories", :action => "show", :product_id => '1', :id => '1').should == "/products/1/stories/1"
     end
   
-    it "should map { :controller => 'stories', :action => 'edit', :product_id => '1', :id => 1 } to /products/1/stories/1/edit" do
-      route_for(:controller => "stories", :action => "edit", :product_id => '1', :id => 1).should == "/products/1/stories/1/edit"
+    it "should map { :controller => 'stories', :action => 'edit', :product_id => '1', :id => '1' } to /products/1/stories/1/edit" do
+      route_for(:controller => "stories", :action => "edit", :product_id => '1', :id => '1').should == "/products/1/stories/1/edit"
     end
   
-    it "should map { :controller => 'stories', :action => 'update', :product_id => '1', :id => 1} to /products/1/stories/1" do
-      route_for(:controller => "stories", :action => "update", :product_id => '1', :id => 1).should == "/products/1/stories/1"
+    it "should map { :controller => 'stories', :action => 'update', :product_id => '1', :id => '1'} to /products/1/stories/1" do
+      route_for(:controller => "stories", :action => "update", :product_id => '1', :id => '1').should == {:path => "/products/1/stories/1", :method => :put}
     end
   
-    it "should map { :controller => 'stories', :action => 'destroy', :product_id => '1', :id => 1} to /products/1/stories/1" do
-      route_for(:controller => "stories", :action => "destroy", :product_id => '1', :id => 1).should == "/products/1/stories/1"
+    it "should map { :controller => 'stories', :action => 'destroy', :product_id => '1', :id => '1'} to /products/1/stories/1" do
+      route_for(:controller => "stories", :action => "destroy", :product_id => '1', :id => '1').should == {:path => "/products/1/stories/1", :method => :delete}
     end
   end
 

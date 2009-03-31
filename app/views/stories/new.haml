@@ -2,7 +2,7 @@
 
 %fieldset
   %ul
-    - form_for(:story, :url => product_story_path(@product, @story)) do |f|
+    - form_for(:story, :url => product_stories_path(@product)) do |f|
       = f.error_messages
       %li
         = f.label :title

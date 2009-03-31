@@ -4,13 +4,15 @@ describe "/sprints/edit" do
   include SprintsHelper
   
   before do
+    @product = mock_model(Product, :name => 'MyProduct', :description => 'TestDesc', :identifier => 'PDCT' )
     @sprint = mock_model(Sprint, :title => 'MyString', :goal => 'MyText', :start_date => Time.now, 
     :end_date => Time.now, :product_id => 1, :sprint_status_id => 1, :sprint => mock_model(SprintStatus, :title => 'open'),
-    :product => mock_model(Product, :name => 'MyProduct', :description => 'TestDesc', :identifier => 'PDCT' ))
+    :product => @product)
     
     @sss1 = mock_model(SprintStatus, :title => 'open', :id => 1)
     @sss2 = mock_model(SprintStatus, :title => 'closed', :id => 2)
 
+    assigns[:product] = @product
     assigns[:sprint] = @sprint
     assigns[:sprint_statuses] = [@sss1, @sss2]
   end

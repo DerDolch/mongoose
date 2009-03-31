@@ -25,15 +25,15 @@
       });
 
       $("##{sprint_id}_acceptme").droppable({
-      	accept: ".ui-draggable",
-      	drop: function(ev, ui) {
-      		$(this).append(ui.draggable);
-      		$.ajax({
-        		url: "/products/#{@product.id}/stories/update_sprint_assoc",
+        accept: ".ui-draggable",
+        drop: function(ev, ui) {
+          $(this).append(ui.draggable);
+          $.ajax({
+            url: "/products/#{@product.id}/stories/update_sprint_assoc",
             type: "PUT",
-      		  data: "sprint_id=#{sprint_id}&story_id=" + ui.draggable.attr("id").split('_')[1]
-      		})
-      	}
+            data: "sprint_id=#{sprint_id}&story_id=" + ui.draggable.attr("id").split('_')[1]
+          })
+        }
       });
       
     });

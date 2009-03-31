@@ -32,6 +32,8 @@ describe "/products/show" do
     @cuser = mock_model(User, :user_status_id => 3, :first_name => "John", :last_name => "Doe", :login => "johndoe",
     :user_status => mock_model(UserStatus, :name => "Super User", :id => 3))
 
+    template.stub!(:current_user).and_return(@cuser)
+
     assigns[:mode] = @mode    
     assigns[:current_user] = @cuser    
     assigns[:product] = @p1

@@ -115,7 +115,7 @@ describe ProductsController do
     before(:each) do
       
       @params = {"product"=>{"name"=>"My Product", "description"=>"THis is a fun little description.", "identifier"=>"MP2"}, "product_user" => {"user_id" => "1"}}
-      @product = Product.new(@params['product'])
+      @product = mock_model(Product)
       @product.stub!(:save).and_return(true)
       Product.stub!(:new).and_return(@product)
     end

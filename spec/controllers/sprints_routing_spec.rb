@@ -11,20 +11,20 @@ describe SprintsController do
       route_for(:controller => "sprints", :action => "new", :product_id => '1').should == "/products/1/sprints/new"
     end
   
-    it "should map { :controller => 'sprints', :action => 'show', :id => 1 } to /products/1/sprints/1" do
-      route_for(:controller => "sprints", :action => "show", :id => 1, :product_id => '1').should == "/products/1/sprints/1"
+    it "should map { :controller => 'sprints', :action => 'show', :id => '1' } to /products/1/sprints/1" do
+      route_for(:controller => "sprints", :action => "show", :id => '1', :product_id => '1').should == "/products/1/sprints/1"
     end
   
-    it "should map { :controller => 'sprints', :action => 'edit', :id => 1 } to /products/1/sprints/1/edit" do
-      route_for(:controller => "sprints", :action => "edit", :id => 1, :product_id => '1').should == "/products/1/sprints/1/edit"
+    it "should map { :controller => 'sprints', :action => 'edit', :id => '1' } to /products/1/sprints/1/edit" do
+      route_for(:controller => "sprints", :action => "edit", :id => '1', :product_id => '1').should == "/products/1/sprints/1/edit"
     end
   
-    it "should map { :controller => 'sprints', :action => 'update', :id => 1} to /products/1/sprints/1" do
-      route_for(:controller => "sprints", :action => "update", :id => 1, :product_id => '1').should == "/products/1/sprints/1"
+    it "should map { :controller => 'sprints', :action => 'update', :id => '1'} to /products/1/sprints/1" do
+      route_for(:controller => "sprints", :action => "update", :id => '1', :product_id => '1').should == {:path => "/products/1/sprints/1", :method => :put}
     end
   
-    it "should map { :controller => 'sprints', :action => 'destroy', :id => 1} to /products/1/sprints/1" do
-      route_for(:controller => "sprints", :action => "destroy", :id => 1, :product_id => '1').should == "/products/1/sprints/1"
+    it "should map { :controller => 'sprints', :action => 'destroy', :id => '1'} to /products/1/sprints/1" do
+      route_for(:controller => "sprints", :action => "destroy", :id => '1', :product_id => '1').should == {:path => "/products/1/sprints/1", :method => :delete}
     end
   end
 

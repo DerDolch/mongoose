@@ -1,7 +1,7 @@
 %h2 New Sprint
 
 %fieldset
-  - form_for(:sprint, :url => product_sprint_path(@product, @sprint)) do |f|
+  - form_for(:sprint, :url => product_sprints_path(@product)) do |f|
     = f.error_messages
     %ul
       %li

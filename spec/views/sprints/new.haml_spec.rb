@@ -18,7 +18,7 @@ describe "/sprints/new" do
   it "should render new form to create a new sprint" do
     render "/sprints/new"
     
-    response.should have_tag("form[action=?][method=post]", product_sprint_path(@p1, @sprint)) do
+    response.should have_tag("form[action=?][method=post]", product_sprints_path(@p1)) do
       with_tag("input#sprint_title[name=?]", "sprint[title]")
       with_tag("textarea#sprint_goal[name=?]", "sprint[goal]")
       with_tag("input#sprint_product_id[name=?]", "sprint[product_id]")
