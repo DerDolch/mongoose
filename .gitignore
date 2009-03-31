@@ -1,0 +1,12 @@
+db/schema.rb
+log/**/*.log
+log/*.log
+tmp/**/*
+tmp/*
+.DS_Store
+doc/api
+doc/app
+config/database.yml
+coverage
+coverage.data
+db/*.sqlite3
