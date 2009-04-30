@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_filter :check_user_access, :except => :index
-  before_filter :check_user_access_edit, :only => [:edit, :new, :create, :destroy]
+  require_role 'Admin', :for_all_except => [:index, :show]
   
   def index
     if current_user.user_status.name == "Developer"
@@ -96,16 +95,6 @@ class ProductsController < ApplicationController
       flash[:error] = 'Product Deletion Failed'
       redirect_to product_path(@product)    
     end
-  end
-
-protected
-
-  def check_user_access
-    redirect_to products_path unless Product.has_access?(params[:id], current_user)  
-  end
-
-  def check_user_access_edit
-    redirect_to product_path(params[:id]) if current_user.user_status.name == "Developer"
   end
 
 end

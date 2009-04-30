@@ -1,8 +1,8 @@
 class SprintsController < ApplicationController
-
+  
+  require_role 'Admin', :for_all_except => [:index, :show]
   before_filter :find_product
-  before_filter :check_user_access_edit
-
+  
   # GET /sprints
   # GET /sprints.xml
   def index
