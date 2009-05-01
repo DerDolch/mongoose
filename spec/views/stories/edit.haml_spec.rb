@@ -5,20 +5,13 @@ describe "/stories/edit" do
   
   before do
 
-    @sprnt1 = mock_model(Sprint, :id => 1, :title => 'My Sprint', :start_date => Time.now, :end_date => Time.now, :sprint_status_id => 1)
-    @sprnt2 = mock_model(Sprint, :id => 1, :title => 'My Sprint', :start_date => Time.now, :end_date => Time.now, :sprint_status_id => 1)
-    @sprints = [@sprnt1, @sprnt2]
-    @active_sprints = [@sprnt1, @sprnt2]
-
-    @story = mock_model(Story, :title => 'MyString', :effort => '2', :description => 'MyText', :product_id => 1, :sprint_id => 1,
-    :sprint => mock_model(Sprint, :title => 'MyString', :goal => 'MyText', :start_date => Time.now, 
-    :end_date => Time.now, :product_id => 1, :sprint_status_id => 1))
-
-    @product = mock_model(Product, :id => 85, :name => 'MyName', :description => 'MyDescr', :identifier => 'DESC',
-    :sprint_id => 1, :sprints => [@sprnt1, @sprnt2], :product_status_id => 1, :product_status => mock_model(ProductStatus, :id => 1, :title => 'Active'))   
-    @product.stub!(:sprints).and_return(@sprints)
-    @sprints.stub!(:active_sprints).and_return(@active_sprints)
+    @sprint = mock_model(Sprint,valid_sprint_attributes)
+    @sprints_proxy = mock('SprintsProxy', :active => [@sprint])
     
+    @story = mock_model(Story,valid_story_attributes)
+    @product = mock_model(Product)
+    @product.stub!(:sprints).and_return(@sprints_proxy)
+
     assigns[:story] = @story
     assigns[:product] = @product
 

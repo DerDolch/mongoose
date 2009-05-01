@@ -1,6 +1,6 @@
 class SprintsController < ApplicationController
   
-  require_role 'Admin', :for_all_except => [:index, :show]
+  #require_role 'Admin', :for_all_except => [:index, :show]
   before_filter :find_product
   
   # GET /sprints

@@ -20,22 +20,22 @@
 #container_left
 
   %h2 Active Sprints
-  - if @active_sprints.blank?
+  - if @product.sprints.active.blank?
     %p There are no active sprints for this product.
   - else
-    = render :partial => 'sprintstory', :object => @active_sprints
+    = render :partial => 'sprintstory', :object => @product.sprints.active
 
   %h2 Completed Sprints
-  - if @completed_sprints.blank?
+  - if @product.sprints.completed.blank?
     %p There are no completed sprints for this product.
   - else
-  = render :partial => 'sprintstory', :object => @completed_sprints
+  = render :partial => 'sprintstory', :object => @product.sprints.completed
 
 
 #container_right
   %h2 Backlog Stories
 
-  = render :partial => 'storytable', :object => @story_backlog, :locals => { :sprint_id => nil, :sortable => @mode, :table_inline => 'display: table;'}
+  = render :partial => 'storytable', :object => @product.stories.unassigned, :locals => { :sprint_id => nil, :sortable => @mode, :table_inline => 'display: table;'}
   
 
 .clear

@@ -40,21 +40,19 @@ describe ProductsController do
 
   describe "GET 'show'" do
  
-    before(:each) do
-      
+    before(:each) do      
       @product_users = [mock_model(User, :id =>1 ), mock_model(User, :id =>2)]
       @product = mock_model(Product, :users => @product_users)
-      # @user_status = mock_model(UserStatus, :id => 1, :name => 'Developer')
       Product.stub!(:find).and_return(@product)
       Product.stub!(:has_access?).and_return(true)
     end   
     
     it "should be redirect if the user is not assigned to the product" do
+      pending "Refactor to use roles"
       Product.stub!(:has_access?).and_return(false)
       get 'show'
       response.should be_redirect
     end
-    
     
     it "should be success if the user is assigned to the product" do
       get 'show'

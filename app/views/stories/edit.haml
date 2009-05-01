@@ -18,6 +18,6 @@
 
       %li
         = f.label :sprint
-        = collection_select(:story, :sprint_id, @product.sprints.active_sprints, :id, :title, {:include_blank => "Backlog Story"} )
+        = collection_select(:story, :sprint_id, @product.sprints.active, :id, :title, {:include_blank => "Backlog Story"} )
 
       = f.submit "Update Story"

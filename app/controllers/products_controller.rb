@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  require_role 'Admin', :for_all_except => [:index, :show]
+  #require_role 'Admin', :for_all_except => [:index, :show]
   
   def index
     if current_user.user_status.name == "Developer"
@@ -12,24 +12,17 @@ class ProductsController < ApplicationController
   end
 
   def show
-    begin
-      @product = Product.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error("Attempt to access invalid product #{params[:id]}]")
-      flash[:notice] = "Invalid Product"
-      redirect_to products_path
-    else
-      @active_sprints = Sprint.find_sprints_from_id_and_status(params[:id], 1)
-      @completed_sprints = Sprint.find_sprints_from_id_and_status(params[:id], 2)
-      @story_backlog = Story.find_story_backlog_from_id(@product.id)
-      
-      if current_user.user_status.name == "Developer"
-        @mode = nil
-      else
-        @mode = params[:mode] || 'sortable'
-      end
+    @product = Product.find(params[:id])
     
+    if current_user.user_status.name == "Developer"
+      @mode = nil
+    else
+      @mode = params[:mode] || 'sortable'
     end
+  rescue ActiveRecord::RecordNotFound
+    logger.error("Attempt to access invalid product #{params[:id]}]")
+    flash[:notice] = "Invalid Product"
+    redirect_to products_path
   end
 
   def new
