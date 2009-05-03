@@ -7,7 +7,7 @@
   %dl{'id'=>'product'}
     - @products.each do |product|
       %dt
-        = link_to "#{product.name} <span>[#{product.identifier}] (#{product.product_status.title})</span>", product_path(product)
+        = link_to "#{product.name} <span>[#{product.identifier}] (#{product.status})</span>", product_path(product)
       %dd
         %p
           %strong Description:

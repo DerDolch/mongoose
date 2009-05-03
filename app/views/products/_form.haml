@@ -27,7 +27,7 @@
           = f.text_field :identifier, :size => 8
         %li
           = f.label :product_status, 'Product Status'
-          = collection_select(:product, :product_status_id, @product_statuses, :id, :title )
+          = f.select(:status, Product::STATUSES )
         %li
           = f.label :description
           = f.text_area :description

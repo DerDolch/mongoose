@@ -5,8 +5,7 @@ module ModelMacros
       :name => 'Test', 
       :description => 'Hello World', 
       :identifier => 'HIWLD', 
-      :product_status_id => 1, 
-      :product_status => mock_model(ProductStatus, :id => 1, :title => 'Active')
+      :status => 'Active'
     }.merge(options)
   end
   
@@ -26,10 +25,30 @@ module ModelMacros
       :start_date => 3.days.ago,
       :end_date => 12.days.from_now,
       :product_id => 1,
-      :sprint_status_id => 1,
-      :sprint_status => mock_model(SprintStatus, :id => 1, :title => 'Active')
-    }
+      :status => 'Open'
+    }.merge(options)
+  end
+  
+  def valid_task_attributes(options={})
+    {
+      :story_id => 1, 
+      :title => "title", 
+      :description =>"desc",
+      :hours => 1, 
+      :status => 'In Progress'
+    }.merge(options)
   end
 
+  def valid_user_attributes(options={})
+    {
+      :first_name => "John", 
+      :last_name => "Doe", 
+      :login => "johndoe", 
+      :email => 'test@example.com',
+      :status => 'Active',
+      :password => '123456',
+      :password_confirmation => '123456'
+    }.merge(options)
+  end
 end
 

@@ -20,7 +20,6 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @tasks = @story.tasks
     @new_task = Task.new
-    @task_statuses = TaskStatus.find(:all)
     @product = @story.product
 
     respond_to do |format|

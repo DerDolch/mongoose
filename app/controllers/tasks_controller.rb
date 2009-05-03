@@ -29,7 +29,6 @@ class TasksController < ApplicationController
   # GET /tasks/new.xml
   def new
     @task = Task.new
-    @task_statuses = TaskStatus.find(:all)
 
     if params[:id].blank?
       # @story = Story.find(:all)
@@ -44,14 +43,12 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
-    @task_statuses = TaskStatus.find(:all)
   end
 
   # POST /tasks
   # POST /tasks.xml
   def create
     @task = Task.new(params[:task])
-    @task_statuses = TaskStatus.find(:all)
 
     respond_to do |format|
       if @task.save
@@ -103,7 +100,7 @@ class TasksController < ApplicationController
     end
   end
 
-  protected
+protected
   
   def find_product
     @product = Product.find_by_id(params[:product_id]) unless params[:product_id].blank?

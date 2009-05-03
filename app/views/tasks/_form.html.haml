@@ -1,0 +1,14 @@
+%ul
+  %li
+    = f.label :title
+    = f.text_field :title
+  %li
+    = f.label :description
+    = f.text_area :description
+  %li
+    = f.label :hours
+    = f.text_field :hours
+  %li
+    = f.label :status 
+    = f.select(:status, Task::STATUSES )
+    = f.hidden_field :story_id, :value => params[:story_id]

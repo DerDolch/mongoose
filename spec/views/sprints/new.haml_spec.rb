@@ -5,13 +5,10 @@ describe "/sprints/new" do
   
   before(:each) do
     @sprint = Sprint.new
-    @p1 = mock_model(Product, :id => 85, :name => 'MyName', :description => 'MyDescr', :identifier => 'DESC')
-    @sss1 = mock_model(SprintStatus, :title => 'open', :id => 1)
-    @sss2 = mock_model(SprintStatus, :title => 'closed', :id => 2)
+    @p1 = mock_model(Product, valid_product_attributes)
 
     assigns[:sprint] = @sprint
     assigns[:product] = @p1
-    assigns[:sprint_statuses] = [@sss1, @sss2]
 
   end
 
@@ -31,7 +28,7 @@ describe "/sprints/new" do
       with_tag('select#sprint_end_date_2i[name=?]', "sprint[end_date(2i)]")
       with_tag('select#sprint_end_date_3i[name=?]', "sprint[end_date(3i)]")
 
-      with_tag("select#sprint_sprint_status_id[name=?]", "sprint[sprint_status_id]")
+      with_tag("select#sprint_status[name=?]", "sprint[status]")
       
       with_tag('input#sprint_submit[value=?]', "Create New Sprint")
 

@@ -4,17 +4,11 @@ describe "/sprints/edit" do
   include SprintsHelper
   
   before do
-    @product = mock_model(Product, :name => 'MyProduct', :description => 'TestDesc', :identifier => 'PDCT' )
-    @sprint = mock_model(Sprint, :title => 'MyString', :goal => 'MyText', :start_date => Time.now, 
-    :end_date => Time.now, :product_id => 1, :sprint_status_id => 1, :sprint => mock_model(SprintStatus, :title => 'open'),
-    :product => @product)
-    
-    @sss1 = mock_model(SprintStatus, :title => 'open', :id => 1)
-    @sss2 = mock_model(SprintStatus, :title => 'closed', :id => 2)
+    @product = mock_model(Product, valid_product_attributes )
+    @sprint = mock_model(Sprint, valid_sprint_attributes)
 
     assigns[:product] = @product
     assigns[:sprint] = @sprint
-    assigns[:sprint_statuses] = [@sss1, @sss2]
   end
 
   it "should render complete edit form" do
@@ -34,7 +28,7 @@ describe "/sprints/edit" do
       with_tag('select#sprint_end_date_2i[name=?]', "sprint[end_date(2i)]")
       with_tag('select#sprint_end_date_3i[name=?]', "sprint[end_date(3i)]")
       
-      with_tag("select#sprint_sprint_status_id[name=?]", "sprint[sprint_status_id]")
+      with_tag("select#sprint_status[name=?]", "sprint[status]")
       
       with_tag('input#sprint_submit[value=?]', "Update Sprint")
       

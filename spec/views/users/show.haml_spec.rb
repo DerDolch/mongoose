@@ -6,7 +6,7 @@ describe "/users/show" do
   before(:each) do
     @u1 = mock_model(User, :updated_at => Time.now, :first_name => 'John', :last_name => 'Doe', :login => 'JohnDoe',
     :email =>'aaa@aaa.com', :created_at => Time.now, :user_status_id => 2, :password => '123456',
-    :password_confirmation => '123456', :user_status => mock_model(UserStatus, :name => "Developer"))
+    :password_confirmation => '123456', :status => 'Active')
     
     assigns[:user] = @u1
     

@@ -11,11 +11,9 @@
         = f.label :goal
         = f.text_area :goal
       %li
-        #start_date
-      
+        #start_date      
       %li
         #end_date
-      
       %li 
         = f.label :start_date
         = f.date_select :start_date
@@ -23,8 +21,8 @@
         = f.label :end_date
         = f.date_select :end_date
       %li
-        = f.label :sprint_status_id
-        = collection_select(:sprint, :sprint_status_id, @sprint_statuses, :id, :title )
+        = f.label :status
+        = f.select(:status, Sprint::STATUSES )
         = f.hidden_field :product_id, :value => params[:product_id]
       %li
         %label 

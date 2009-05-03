@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe "/products/show" do
   before(:each) do
     
-    @user = mock_model(User, :user_status_id => 3, :first_name => "John", :last_name => "Doe", :login => "johndoe", :user_status => mock_model(UserStatus, :name => "Super User", :id => 3))
+    @user = mock_model(User, :status => "Active", :first_name => "John", :last_name => "Doe", :login => "johndoe")
     template.stub!(:current_user).and_return(@user)
     
     @sprint = mock_model(Sprint, valid_sprint_attributes)

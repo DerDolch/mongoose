@@ -1,9 +1,19 @@
 class Task < ActiveRecord::Base
   
-  belongs_to :story
-  belongs_to :task_status
+  # =============
+  # = Constants =
+  # =============
+  STATUSES = ["Not Started", "Impeded", "Haulted", "In Progress", "Completed"].freeze
   
-  validates_presence_of :title, :description, :task_status_id
+  # ================
+  # = Associations =
+  # ================
+  belongs_to :story
+  
+  # ===============
+  # = Validations =
+  # ===============
+  validates_presence_of :title, :description, :status
   validates_length_of :title, :minimum => 5
   
 end

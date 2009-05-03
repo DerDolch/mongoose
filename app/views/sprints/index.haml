@@ -1,7 +1,7 @@
 %h3.breadcrumb
   = link_to 'Products', products_path
   = " / "
-  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.product_status.title})", product_path(@product)
+  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.status})", product_path(@product)
   = " / Manage Sprints"
 
 = link_to 'New Sprint', new_product_sprint_path(@product), :id => 'sprint_link_add'
@@ -26,7 +26,7 @@
           %td= link_to sprint.goal, product_sprint_path(@product, sprint)
           %td=h sprint.start_date.to_s(:long)
           %td=h sprint.end_date.to_s(:long)
-          %td= sprint.sprint_status.title
+          %td= sprint.status
           %td= link_to 'Edit', edit_product_sprint_path(@product, sprint)
           %td= link_to 'Remove', product_sprint_path(@product, sprint), :method => :delete, :confirm => "Are you sure you want to remove #{sprint.title}?"
 

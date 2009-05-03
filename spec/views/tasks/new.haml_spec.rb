@@ -4,18 +4,15 @@ describe "/tasks/new" do
   include TasksHelper
   
   before(:each) do
-    @task = mock_model(Task, :story_id => 1, :title => "title", :description =>"desc", 
-    :hours => 1, :task_status_id => 1, :task_status => mock_model(TaskStatus, :id => 1, :name=>"Done"))    
-    @task.stub!(:new_record?).and_return(true)
-    @tsess = [mock_model(TaskStatus, :name => "Ready", :id => 1), mock_model(TaskStatus, :name => "Not Ready", :id => 2)]
-    
-    @p1 = mock_model(Story, :title => 'MyString', :effort => '1', :description => 'MyText', :product_id => 2)
-    @s1 = mock_model(Product, :id => 85, :name => 'MyName', :description => 'MyDescr', :identifier => 'DESC')
+    @task = mock_model(Task, valid_task_attributes) 
+    @task.stub!(:new_record?).and_return(true)   
 
-    assigns[:product] = @p1
-    assigns[:story] = @s1
+    @story = mock_model(Story, valid_story_attributes)
+    @product = mock_model(Product, valid_product_attributes)
+
+    assigns[:product] = @product
+    assigns[:story] = @story
     assigns[:task] = @task
-    assigns[:task_statuses] = @tsess
   end
 
   def do_render
@@ -31,11 +28,12 @@ describe "/tasks/new" do
     
     do_render
     
-    response.should have_tag("fieldset form[action=?][method=post]", product_story_task_path(@p1, @s1, @task)) do
+    #raise response.body
+    response.should have_tag("fieldset form[action=?][method=post]", product_story_task_path(@product, @story, @task)) do
       with_tag("input#task_title[name=?]", "task[title]")
       with_tag("textarea#task_description[name=?]", "task[description]")
       with_tag("input#task_hours[name=?]", "task[hours]")
-      with_tag("select#task_task_status_id[name=?]", "task[task_status_id]")
+      with_tag("select#task_status[name=?]", "task[status]")
     end
   end
 end

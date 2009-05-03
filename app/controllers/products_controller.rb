@@ -3,22 +3,21 @@ class ProductsController < ApplicationController
   #require_role 'Admin', :for_all_except => [:index, :show]
   
   def index
-    if current_user.user_status.name == "Developer"
-      @products = Product.find(:all, :include => :users, :conditions => ['users.id=? AND product_status_id IN (?)', current_user.id, 0..2])
-    else
+    # if current_user.user_status.name == "Developer"
+    #   @products = Product.find(:all, :include => :users, :conditions => ['users.id=? AND product_status_id IN (?)', current_user.id, 0..2])
+    # else
       @products = Product.all
-    end
-
+    # end
   end
 
   def show
     @product = Product.find(params[:id])
-    
-    if current_user.user_status.name == "Developer"
-      @mode = nil
-    else
-      @mode = params[:mode] || 'sortable'
-    end
+    @mode = params[:mode] || 'sortable'
+    # if current_user.user_status.name == "Developer"
+    #   @mode = nil
+    # else
+    #   @mode = params[:mode] || 'sortable'
+    # end
   rescue ActiveRecord::RecordNotFound
     logger.error("Attempt to access invalid product #{params[:id]}]")
     flash[:notice] = "Invalid Product"
@@ -29,14 +28,12 @@ class ProductsController < ApplicationController
     @product = Product.new
     @users_list = User.find(:all) # TODO: calling this "users" would be more standard
     @users_assigned = []
-    @product_statuses = ProductStatus.all
   end
 
   def create
     @product = Product.new(params[:product])
     @users_list = User.find(:all)
     @users_assigned = []
-    @product_statuses = ProductStatus.all
      
     if @product.save
       unless params[:product_user][:user_id].blank?
@@ -51,7 +48,6 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
-    @product_statuses = ProductStatus.all
 
     @users_assigned = @product.users
     @users_list = User.find(:all)
@@ -60,7 +56,6 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    @product_statuses = ProductStatus.find(:all)
 
     @users_list = User.find(:all)
     if @product.update_attributes(params[:product])
@@ -80,7 +75,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    @product_statuses = ProductStatus.all
+
     if @product.destroy 
       flash[:notice] = 'Product Deleted'
       redirect_to products_path 

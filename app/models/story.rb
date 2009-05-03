@@ -5,9 +5,9 @@ class Story < ActiveRecord::Base
   # ================
   # = Associations =
   # ================
-  belongs_to :product
   has_many :tasks, :dependent => :destroy
-  has_and_belongs_to_many :sprints
+  belongs_to :product
+  belongs_to :sprints
   
   # ===============
   # = Validations =

@@ -19,13 +19,9 @@
       = label_tag 'Last Name'
       = f.text_field :last_name
 
-
-    - if current_user.user_status.name == "Super User"
-      %ul
-        = f.label :user_status_id
-        = collection_select(:user, :user_status_id, @user_statuses, :id, :name )
-    - else
-      = f.hidden_field(:user_status_id)
+    %ul
+      = f.label :user_status_id
+      = f.select(:status, User::STATUSES )
 
     %ul
       = label_tag 'password'

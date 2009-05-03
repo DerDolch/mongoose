@@ -1,7 +1,7 @@
 %h3.breadcrumb
   = link_to 'Products', products_path
   = " / "
-  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.product_status.title})", product_path(@product)
+  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.status})", product_path(@product)
   = " / "
   = link_to "Manage Sprints", product_sprints_path(@product)
   = " / View"
@@ -14,7 +14,7 @@
   %br
   = "<strong>Goal:</strong> #{@sprint.goal}" unless @sprint.goal.empty?
 
-  - if Time.now <= @sprint.end_date && @sprint.sprint_status.id == 1
+  - if Time.now <= @sprint.end_date && @sprint.status == 'Active'
   
     = render :partial => 'products/storytable', :object => @stories, :locals => { :sprint_id => @sprint.id, :sortable => @mode, :table_inline => nil }
     

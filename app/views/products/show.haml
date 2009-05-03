@@ -1,7 +1,7 @@
 %h3.breadcrumb
   %span
     = link_to 'Products', products_path
-    = " / " + "#{@product.name} [#{@product.identifier}] (#{@product.product_status.title})"
+    = " / " + "#{@product.name} [#{@product.identifier}] (#{@product.status})"
 
 %h2 Product Description:
 
@@ -12,8 +12,8 @@
 %br/
 %p
   = link_to 'New Story', new_product_story_path(@product), :id => 'story_link_add'
-  = link_to 'Manage Sprints', product_sprints_path(@product), :id => 'sprint_link_manage'  if current_user.user_status.name != "Developer"
-  = link_to 'Edit Product', edit_product_path(@product), :id => 'product_link_edit'  if current_user.user_status.name != "Developer"
+  = link_to 'Manage Sprints', product_sprints_path(@product), :id => 'sprint_link_manage'  if current_user.status != "Developer"
+  = link_to 'Edit Product', edit_product_path(@product), :id => 'product_link_edit'  if current_user.status != "Developer"
   = link_to 'Remove Product', product_path(@product), :method => :delete, :confirm => "Are you sure you want to remove #{@product.name}?", :id => 'product_link_remove'
 
 

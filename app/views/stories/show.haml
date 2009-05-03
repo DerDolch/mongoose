@@ -1,7 +1,7 @@
 %h3.breadcrumb
   = link_to 'Products', products_path
   = " / "
-  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.product_status.title})", product_path(@product)
+  = link_to "#{@product.name} [#{@product.identifier}] (#{@product.status})", product_path(@product)
   = " / <span>#{@product.identifier}-#{@story.id}</span>"
 
 %h2= @story.title
@@ -27,19 +27,19 @@
   :javascript
     $(document).ready(function() {      
       $(".select_change").change(function () {
-                $(".select_change option:selected").each(function () {   
+        $(".select_change option:selected").each(function () {   
 
-                      var task_id = $(this).parent().attr("id").split('_')[1];
-                      var task_status_id = $(this).val();
-                                            
-                      $.ajax({
-                        url: "#{@story.id}/tasks/update_task_status",
-                        type: "PUT",
-                        data: "task_id=" + task_id + "&task_status_id=" + task_status_id
-                      })
-                      
-                    });
-              })
+          var task_id = $(this).parent().attr("id").split('_')[1];
+          var task_status_id = $(this).val();
+                        
+          $.ajax({
+            url: "#{@story.id}/tasks/update_task_status",
+            type: "PUT",
+            data: "task_id=" + task_id + "&task_status_id=" + task_status_id
+          })
+  
+        });
+      })
     });
 
   %table{'cellpadding' => '0', 'cellspacing' => '0'}
@@ -56,9 +56,9 @@
           %td= task.description
           %td= task.hours
           %td
-            %form{'action'=>'task'}
+            - form_for task, :url => product_story_task_path(@product, @story, task) do |f|
               %fieldset 
-                = select_tag 'task[task_status_id]', options_from_collection_for_select(@task_statuses, :id, :name, task.task_status.id), :id => "task_#{task.id}", :class => 'select_change'
+                = f.select :status, Task::STATUSES, :id => "task_#{task.id}", :class => 'select_change'
           %td
             = link_to 'Edit', edit_product_story_task_path(@product, @story, task)
             = "/"

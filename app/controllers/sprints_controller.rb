@@ -8,10 +8,10 @@ class SprintsController < ApplicationController
   def index
     @sprints = @product.sprints
 
-   # respond_to do |format|
-   #   format.html # index.html.erb
-   #  format.xml  { render :xml => @sprints }
-   # end
+   respond_to do |format|
+     format.html # index.html.erb
+    format.xml  { render :xml => @sprints }
+   end
   end
 
   # GET /sprints/1
@@ -20,11 +20,7 @@ class SprintsController < ApplicationController
     @sprint = Sprint.find(params[:id])
     @stories = Story.find_story_list_from_sprint_id(@sprint)
 
-    if current_user.user_status.name == "Developer"
-      @mode = nil
-    else
-      @mode = params[:mode] || 'sortable'
-    end
+    @mode = params[:mode] || 'sortable'
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,7 +32,6 @@ class SprintsController < ApplicationController
   # GET /sprints/new.xml
   def new
     @sprint = Sprint.new
-    @sprint_statuses = SprintStatus.find(:all)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,14 +42,12 @@ class SprintsController < ApplicationController
   # GET /sprints/1/edit
   def edit
     @sprint = Sprint.find(params[:id])
-    @sprint_statuses = SprintStatus.find(:all)
   end
 
   # POST /sprints
   # POST /sprints.xml
   def create
     @sprint = Sprint.new(params[:sprint])
-    @sprint_statuses = SprintStatus.find(:all)
 
     respond_to do |format|
       if @sprint.save
@@ -85,8 +78,6 @@ class SprintsController < ApplicationController
         format.xml  { render :xml => @sprint.errors, :status => :unprocessable_entity }
       end
     end
-
-    
   end
 
   # DELETE /sprints/1
@@ -101,14 +92,10 @@ class SprintsController < ApplicationController
     end
   end
 
-  protected
+protected
   
   def find_product
     @product = Product.find_by_id(params[:product_id]) unless params[:product_id].blank?
     redirect_to products_path if @product.blank?
-  end
-
-  def check_user_access_edit
-    redirect_to product_path(params[:id]) if current_user.user_status.name == "Developer"
   end
 end

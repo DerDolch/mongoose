@@ -4,15 +4,14 @@ describe "/tasks/show" do
   include TasksHelper
   
   before(:each) do
-    @task = mock_model(Task, :story_id => 1, :title => "title", :description =>"desc",
-    :hours => 1, :task_status => mock_model(TaskStatus, :name=>"Completed"))    
+    @task = mock_model(Task, valid_task_attributes)    
 
-    @p1 = mock_model(Story, :title => 'MyString', :effort => '1', :description => 'MyText', :product_id => 2)
-    @s1 = mock_model(Product, :id => 85, :name => 'MyName', :description => 'MyDescr', :identifier => 'DESC')
+    @story = mock_model(Story, valid_story_attributes)
+    @product = mock_model(Product, valid_product_attributes)
 
     assigns[:task] = @task
-    assigns[:product] = @p1
-    assigns[:story] = @s1
+    assigns[:product] = @product
+    assigns[:story] = @story
 
   end
 

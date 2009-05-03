@@ -4,21 +4,15 @@ describe "/tasks/index" do
   include TasksHelper
   
   before(:each) do
-    @task_1 = mock_model(Task, :title => 'My String', :description => 'MyText', :hours => 1, :task_status_id => 1,
-    :task_status => mock_model(TaskStatus, :id => 1, :name=>"Done"))
+    @task = mock_model(Task, valid_task_attributes)
 
+    @story = mock_model(Story, valid_story_attributes)
+    @product = mock_model(Product, valid_product_attributes)
 
-    @task_2 = mock_model(Task, :title => 'My String', :description => 'MyText', :hours => 1, :task_status_id => 1,
-    :task_status => mock_model(TaskStatus, :id => 1, :name=>"Done"))
+    assigns[:product] = @product
+    assigns[:story] = @story
 
-
-    @p1 = mock_model(Story, :title => 'MyString', :effort => '1', :description => 'MyText', :product_id => 2)
-    @s1 = mock_model(Product, :id => 85, :name => 'MyName', :description => 'MyDescr', :identifier => 'DESC')
-
-    assigns[:product] = @p1
-    assigns[:story] = @s1
-
-    assigns[:tasks] = [@task_1, @task_2]
+    assigns[:tasks] = [@task, @task]
   end
 
   def do_render
@@ -31,9 +25,9 @@ describe "/tasks/index" do
     do_render
 
     response.should have_tag("table tbody") do
-      response.should have_tag("tr td", 'My String', 2)
-      response.should have_tag("tr td", 'MyText', 2)
-      response.should have_tag("tr td", '1', 2)
+      response.should have_tag("tr td", @task.title, 2)
+      response.should have_tag("tr td", @task.description, 2)
+      response.should have_tag("tr td", @task.status, 2)
       response.should have_tag('a', 'Show', 2)
       response.should have_tag('a', 'Edit', 2)
       response.should have_tag('a', 'Remove', 2)
@@ -43,7 +37,7 @@ describe "/tasks/index" do
 
   it "should have a link to create a new tasks" do
     do_render   
-    response.should have_tag("a[href=#{new_product_story_task_path(@p1, @s1)}]", 'New Task')
+    response.should have_tag("a[href=#{new_product_story_task_path(@product, @story)}]", 'New Task')
   end
 
 end

@@ -17,7 +17,7 @@
           %td=h task.title
           %td=h task.description
           %td=h task.hours
-          %td=h task.task_status_id
+          %td=h task.status
           %td= link_to 'Show', product_story_task_path(@product, @story, task)
           %td= link_to 'Edit', edit_product_story_task_path(@product, @story, task)
           %td= link_to 'Remove', product_story_task_path(@product, @story, task), :confirm => 'Are you sure?', :method => :delete

@@ -1,28 +1,11 @@
-%h1 Editing Task
+%h2 Create New Task
 
-- form_for(@task, :url => product_story_task_path(@product, @story, @task)) do |f|
-  = f.error_messages
-  
-  %fieldset
-    %ul
-      %li
-        = f.label :title
-        = f.text_field :title
-
-      %li
-        = f.label :description
-        = f.text_area :description
-
-      %li
-        = f.label :hours
-        = f.text_field :hours
-      
-      %li
-        = f.label :task_status_id
-        = collection_select(:task, :task_status_id, @task_statuses, :id, :name )
-        = f.hidden_field :story_id, :value => params[:story_id]
-      
-      %li= f.submit "Update" 
+%fieldset
+  - form_for(@task, :url => product_story_task_path(@product, @story, @task)) do |f|
+    = f.error_messages
+    
+    = render :partial => 'form', :locals => {:f => f}
+    %li= f.submit "Update Task"
 
 
 = link_to 'Show', product_story_task_path(@product, @story, @task)

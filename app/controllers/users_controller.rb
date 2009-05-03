@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
-    @user_statuses = UserStatus.find(:all)
   end
  
   # POST/users
@@ -47,7 +46,6 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
      @user = User.find(params[:id])
-     @user_statuses = UserStatus.find(:all)
 
      if @user.update_attributes(params[:user])
        flash[:notice] = 'Users Updated'
@@ -71,7 +69,7 @@ class UsersController < ApplicationController
 protected 
 
   def check_if_user_is_developer
-    redirect_to products_path if current_user.user_status.name == "Developer"
+    redirect_to products_path if current_user.status == "Developer"
   end
  
 end

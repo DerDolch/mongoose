@@ -1,11 +1,15 @@
-class Sprint < ActiveRecord::Base
+class Sprint < ActiveRecord::Base  
+  
+  # =============
+  # = Constants =
+  # =============
+  STATUSES = ["Open", "Completed", "Cancelled"].freeze
   
   # ================
   # = Associations =
   # ================
   belongs_to :product
-  belongs_to :sprint_status
-  has_and_belongs_to_many :stories
+  has_many :stories
   
   # ===============
   # = Validations =

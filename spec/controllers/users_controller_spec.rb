@@ -46,7 +46,7 @@ describe UsersController do
   
   def create_user(options = {})
     post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-      :password => 'quire69', :password_confirmation => 'quire69', :user_status_id => 2, :first_name => 'John',
+      :password => 'quire69', :password_confirmation => 'quire69', :first_name => 'John',
       :last_name => 'doe'}.merge(options)
   end
 end
@@ -56,7 +56,7 @@ describe UsersController do
   describe "GET 'index'" do
     
     before(:each) do
-      login_as_mock_user
+      login_as_mock_user(:status => 'Active')
       @users = mock_model(User)
       User.stub!(:find).and_return([@users])
     end
@@ -81,7 +81,7 @@ describe UsersController do
   describe "GET 'show'" do
     
     before(:each) do
-      login_as_mock_user
+      login_as_mock_user(:status => 'Active')
       @user = mock_model(User)
     end
     
