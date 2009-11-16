@@ -6,27 +6,29 @@
 %fieldset
   - form_for :user, :url => users_path do |f|
     %ul
-      = label_tag 'username'
+      = f.label :login, "Username"
       = f.text_field :login
     %ul
-      = label_tag 'email'
+      = f.label :email
       = f.text_field :email
 
     %ul
-      = label_tag 'First Name'
+      = f.label :first_name
       = f.text_field :first_name
 
       %ul
-        = label_tag 'Last Name'
+        = f.label :last_name
         = f.text_field :last_name
 
     %ul
-      = label_tag 'password'
+      = f.label :password
       = f.password_field :password
     
     %ul
-      = label_tag 'password_confirmation', 'Confirm Password'
+      = f.label :password_confirmation, 'Confirm Password'
       = f.password_field :password_confirmation
-      = f.hidden_field :user_status_id, :value => '1'
+
+    %ul
+      
     %ul
       = submit_tag 'Sign up'

@@ -13,7 +13,7 @@
         %a{'href'=>'/', 'title'=>'Home', 'id'=>'home_link'} Home
         %h1 Mongoose <sup>Beta</sup>
         #login
-          = render :partial =>  'users/user_bar' if logged_in? 
+          = render :partial =>  'users/user_bar' if current_user 
 
       #container
         - if flash[:notice]
