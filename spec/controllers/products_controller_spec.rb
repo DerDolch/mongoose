@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe ProductsController do
 
   before(:each) do
-    login_as_mock_user
+    login
     Product.stub!(:has_access?).and_return(true)    
   end
 
@@ -16,7 +16,6 @@ describe ProductsController do
   describe "GET 'index'" do
     
     before(:each) do
-      
       @product = mock_model(Product)
       Product.stub!(:find).and_return([@product])
     end
@@ -74,7 +73,6 @@ describe ProductsController do
   describe "GET 'new'" do
 
     before(:each) do
-      
       @product = mock_model(Product)
       Product.stub!(:new).and_return(@product)
       @user_list = mock_model(User)
@@ -111,7 +109,6 @@ describe ProductsController do
   describe "POST 'create'" do
     
     before(:each) do
-      
       @params = {"product"=>{"name"=>"My Product", "description"=>"THis is a fun little description.", "identifier"=>"MP2"}, "product_user" => {"user_id" => "1"}}
       @product = mock_model(Product)
       @product.stub!(:save).and_return(true)

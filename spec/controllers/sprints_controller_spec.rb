@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SprintsController do
   before(:each) do
-    login_as_mock_user
+    login
     @product = mock_model(Product)
     Product.stub!(:find_by_id).and_return(@product)
   end

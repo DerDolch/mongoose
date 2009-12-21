@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
-  fixtures :users
 
   it 'allows signup' do
     lambda do
@@ -56,7 +55,7 @@ describe UsersController do
   describe "GET 'index'" do
     
     before(:each) do
-      login_as_mock_user(:status => 'Active')
+      login
       @users = mock_model(User)
       User.stub!(:find).and_return([@users])
     end
@@ -81,7 +80,7 @@ describe UsersController do
   describe "GET 'show'" do
     
     before(:each) do
-      login_as_mock_user(:status => 'Active')
+      login
       @user = mock_model(User)
     end
     

@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe StoriesController do
   before(:each) do
-    login_as_mock_user
+    login
     @product = mock_model(Product)
     Product.stub!(:find_by_id).and_return(@product)
   end
@@ -75,7 +75,6 @@ describe StoriesController do
   describe "handling GET /stories.xml" do
 
     before(:each) do
-      login_as_mock_user
       @stories = mock("Array of Stories", :to_xml => "XML")
       Story.stub!(:find).and_return(@stories)
     end
@@ -105,7 +104,6 @@ describe StoriesController do
   describe "handling GET /stories/1" do
 
     before(:each) do
-      login_as_mock_user
       @story = mock_model(Story)
       @tasks = mock_model(Task)
       Story.stub!(:find).and_return(@story)
@@ -142,7 +140,6 @@ describe StoriesController do
   describe "handling GET /stories/1.xml" do
 
     before(:each) do
-      login_as_mock_user
       @tasks = mock_model(Task)
       @story = mock_model(Story, :to_xml => "XML")
       Story.stub!(:find).and_return(@story)
@@ -176,7 +173,6 @@ describe StoriesController do
   describe "handling GET /stories/new" do
 
     before(:each) do
-      login_as_mock_user
       @story = mock_model(Story)
       Story.stub!(:new).and_return(@story)
     end
@@ -214,7 +210,6 @@ describe StoriesController do
   describe "handling GET /stories/1/edit" do
 
     before(:each) do
-      login_as_mock_user
       @story = mock_model(Story)
       Story.stub!(:find).and_return(@story)
     end
@@ -247,7 +242,6 @@ describe StoriesController do
   describe "handling POST /stories" do
 
     before(:each) do
-      login_as_mock_user
       @story = mock_model(Story, :to_param => "1")
       Story.stub!(:new).and_return(@story)
     end
@@ -289,7 +283,6 @@ describe StoriesController do
   describe "handling PUT /stories/1" do
 
     before(:each) do
-      login_as_mock_user
       @story = mock_model(Story, :to_param => "1")
       Story.stub!(:find).and_return(@story)
     end
@@ -342,7 +335,6 @@ describe StoriesController do
   describe "handling DELETE /stories/1" do
 
     before(:each) do
-      login_as_mock_user
       @story = mock_model(Story, :destroy => true)
       Story.stub!(:find).and_return(@story)
     end

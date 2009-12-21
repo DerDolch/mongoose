@@ -9,6 +9,8 @@ require 'spec/rails'
 require File.dirname(__FILE__) + "/model_macros.rb"
 require File.dirname(__FILE__) + "/controller_macros.rb"
 
+require 'authlogic/test_case'
+
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record

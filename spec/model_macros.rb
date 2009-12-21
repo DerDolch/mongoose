@@ -47,7 +47,8 @@ module ModelMacros
       :email => 'test@example.com',
       :status => 'Active',
       :password => '123456',
-      :password_confirmation => '123456'
+      :password_confirmation => '123456',
+      :persistence_token => 'token goes here'
     }.merge(options)
   end
 end
