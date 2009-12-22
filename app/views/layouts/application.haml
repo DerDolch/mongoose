@@ -5,16 +5,10 @@
     %meta{:name => "author", :content =>"Nathan Bertram"}
     %title Mongoose - Scrum Tool
     = stylesheet_link_tag "default", :media => 'all'
-    = javascript_include_tag 'jquery', 'jquery-ui', 'jrails', 'jquery.multiselects.packed', 'jquery.tablednd_0_5 _2','application'
+    = javascript_include_tag :all
 
   %body
     #wrapper
-      #header
-        %a{'href'=>'/', 'title'=>'Home', 'id'=>'home_link'} Home
-        %h1 Mongoose <sup>Beta</sup>
-        #login
-          = render :partial =>  'users/user_bar' if current_user 
-
       #container
         - if flash[:notice]
           #flash_notice= flash[:notice]
@@ -22,3 +16,7 @@
           #flash_notice= flash[:error]
           
         = yield :layout
+  
+    = render :partial => 'shared/menu'
+  
+  = yield :javascript

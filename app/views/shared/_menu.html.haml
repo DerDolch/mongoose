@@ -1,0 +1,18 @@
+#menu
+  Mongoose
+  %sup
+    Beta
+  #login
+    = link_to 'Me', user_path(current_user)
+    = link_to "(Log out)", logout_path, { :title => "Log out" }  
+
+- content_for :javascript do
+  :javascript
+    $(document).ready(function(){
+      meerkat({
+        container: '#menu',
+        meerkatPosition: 'top',
+        background: '#2e2a22',
+        height: '40px'
+      });
+    });

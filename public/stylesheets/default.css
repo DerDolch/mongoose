@@ -34,10 +34,9 @@ h3 { font-size: 1.3em; }
 .right { float: right; }
 
 div#wrapper {
-  width: 950px;
-  margin: 0 auto;
   background: #fffcce;
   border-bottom: 2px solid #c9af7b;
+  padding-top: 40px;
 }
 
 div#container {
@@ -59,28 +58,6 @@ div#container_right {
 	margin: 0 0 0 10px; padding: 0;	
 	width: 460px;
 	float: left;
-}
-
-div#header {
-  width: 950px;  
-  height: 65px;
-  padding: 0 10px;
-  margin: 0;
-  w\idth: 930px;
-  background: #c9af7b;
-  position: relative;
-}
-
-div#header h1 {
-  margin: 0;
-  padding: 0;  
-  line-height: 65px;
-}
-
-div#header div#login {
-	position: absolute;
-	top: 10px; right: 10px;
-	text-align: right;
 }
 
 a#home_link {
@@ -297,5 +274,25 @@ dl#user_select_box dd.left_user { width: 175px; }
 dl#user_select_box dd.middle_user { width: 25px; }
 
 dl#user_select_box dd.right_user { width: 175px; }
+
+div#menu
+{
+  color: #FFFFFF;
+  padding: 8px 10px;
+  font-weight: bold;
+}
+
+div#menu #login
+{
+  padding: 5px 0;
+  float: right;
+  color: #FFFFFF;
+}
+
+div#menu a
+{
+  color: #FFFFFF;
+}
+
 
 .clear { clear: both; }

@@ -1,7 +1,0 @@
-#user-bar-greeting
-  = link_to_current_user :content_method => :login
-  
-  - if current_user.status != "Developer"
-    |
-    = link_to "Manage Users", users_path
-#user-bar-action= link_to "(Log out)", logout_path, { :title => "Log out" }  
