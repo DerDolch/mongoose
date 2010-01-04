@@ -282,6 +282,11 @@ div#menu
   font-weight: bold;
 }
 
+div#menu #logo
+{
+  padding-right: 20px;
+}
+
 div#menu #login
 {
   padding: 5px 0;
@@ -292,6 +297,8 @@ div#menu #login
 div#menu a
 {
   color: #FFFFFF;
+  border-left: 1px solid #888;
+  padding: 0 6px;
 }
 
 

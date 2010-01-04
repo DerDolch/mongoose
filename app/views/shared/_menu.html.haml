@@ -1,11 +1,18 @@
 #menu
-  Mongoose
-  %sup
-    Beta
+  %span#logo
+    Mongoose
+    %sup
+      Beta
+    
+  = link_to 'products', products_url
+  
   #login
-    = link_to 'Me', user_path(current_user)
-    = link_to "(Log out)", logout_path, { :title => "Log out" }  
-
+    - if current_user
+      = current_user.first_name
+      = link_to "logout", logout_path, { :title => "Log out" }  
+    - else
+      = link_to "login", login_path, { :title => "Login" }
+      
 - content_for :javascript do
   :javascript
     $(document).ready(function(){
