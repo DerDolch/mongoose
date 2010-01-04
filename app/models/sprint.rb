@@ -24,7 +24,7 @@ class Sprint < ActiveRecord::Base
   # ================
   # = Named Scopes =
   # ================
-  named_scope :active, :conditions => { :sprint_status_id => 1 }
-  named_scope :completed, :conditions => { :sprint_status_id => 2 }
+  named_scope :active, :conditions => { :status => 'Open' }
+  named_scope :completed, :conditions => { :status => 'Completed' }
   
 end
