@@ -1,0 +1,13 @@
+%h1 Listing Teams
+
+%table
+  %tr
+    %th Name
+    %th Active
+  - @teams.each do |team| 
+    %tr
+      %td=team.name
+      %td=team.active
+      %td=link_to 'Show', team
+
+= link_to 'New team', new_team_path

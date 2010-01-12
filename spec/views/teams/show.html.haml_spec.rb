@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe "/teams/show.html.erb" do
+describe "/teams/show.html.haml" do
   include TeamsHelper
   before(:each) do
     assigns[:team] = @team = stub_model(Team,

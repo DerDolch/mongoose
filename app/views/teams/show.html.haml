@@ -1,0 +1,16 @@
+%h3.breadcrumb
+  = link_to 'Teams', products_path
+  = " / "
+  = link_to @team.name, team_path(@team)
+
+%h2 Team Description
+
+%p
+  %strong Name:
+  = @team.name
+
+= link_to 'Edit', edit_team_path(@team)
+|
+= link_to 'Destroy', @team, :confirm => 'Are you sure?', :method => :delete
+|
+= link_to 'Back', teams_path

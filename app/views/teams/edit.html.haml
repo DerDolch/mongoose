@@ -1,0 +1,19 @@
+%h2 Editing Team
+
+%fieldset
+  - form_for(@team) do |f|
+
+    = f.error_messages
+    
+    %ul
+      = label_tag 'name'
+      = f.text_field :name
+    %ul
+      = label_tag 'active'
+      = f.check_box :active
+    %ul
+      = submit_tag 'Update'
+
+= link_to 'Show', @team
+|
+= link_to 'Back', teams_path
