@@ -4,6 +4,19 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
   
+  # ================
+  # = Associations =
+  # ================
+  has_and_belongs_to_many :teams
+  
+  # ================
+  # = Named Scopes =
+  # ================
+  named_scope :not_on_team, lambda{|team_id| {:joins => "LEFT JOIN teams_users ON teams_users.user_id=users.id AND team_id=#{team_id}", :conditions => 'team_id IS NULL'}}
+  
+  # ===============
+  # = Validations =
+  # ===============
   validates_presence_of  :first_name, :last_name
 
   # ---------------------------------------
@@ -20,4 +33,10 @@ class User < ActiveRecord::Base
   end
   # ---------------------------------------
   
+  # ====================
+  # = Instance Methods =
+  # ====================
+  def full_name
+    [first_name, last_name].compact.join(' ').squeeze(' ')
+  end
 end

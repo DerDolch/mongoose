@@ -7,7 +7,8 @@ describe "/teams/edit.html.haml" do
     assigns[:team] = @team = stub_model(Team,
       :new_record? => false,
       :name => "value for name",
-      :active => false
+      :active => false,
+      :users => []
     )
   end
 

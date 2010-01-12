@@ -11,9 +11,48 @@
     %ul
       = label_tag 'active'
       = f.check_box :active
-    %ul
-      = submit_tag 'Update'
+
+    %div#assigned_users
+      %h3
+        Assigned Users
+      %ul#assigned.connectedSortable
+        - @team.users.each do |user|
+          %li{:id => "team_#{user.id}", :class => "ui-state-highlight"}
+            = hidden_field_tag 'team[user_ids][]', user.id
+            = user.full_name
+    
+    %div#unassigned_users
+      %h3
+        Available Users
+      %ul#unassigned.connectedSortable
+        - User.not_on_team(@team.id).each do |user|
+          %li{:id => "team_#{user.id}", :class => "ui-state-highlight"}
+            = user.full_name
+
+    .clear
+    
+    = submit_tag 'Update'
 
 = link_to 'Show', @team
 |
 = link_to 'Back', teams_path
+
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $('#unassigned').sortable({
+        connectWith: $('.connectedSortable')
+      });
+      $("#assigned").sortable({
+        connectWith: $('.connectedSortable'),
+        receive: function(event, ui) {
+              //Run this code whenever an item is dragged and dropped into this list
+              var user_id = ui.item.attr('id').replace('team_','')
+              ui.item.append('<input type="hidden" name="team[user_ids][]" value="'+user_id+'" />')
+            },
+        remove: function(event, ui){
+          //Run this code whenever an item is dragged and dropped out of this list
+          ui.item.find('input[type=hidden]').remove()
+        }
+      });
+    });
