@@ -2,6 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TeamsController do
 
+  before(:each) do
+    login
+  end
+
   def mock_team(stubs={})
     @mock_team ||= mock_model(Team, stubs)
   end
