@@ -5,7 +5,8 @@ describe "/teams/show.html.haml" do
   before(:each) do
     assigns[:team] = @team = stub_model(Team,
       :name => "value for name",
-      :active => false
+      :active => false,
+      :users => [mock_model(User, :full_name => "Chuck")]
     )
   end
 

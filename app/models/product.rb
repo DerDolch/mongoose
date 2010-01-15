@@ -12,6 +12,7 @@ class Product < ActiveRecord::Base
   has_many :sprints
   has_many :users, :through => :product_users
   has_many :product_users, :dependent => :destroy
+  has_many :releases
   
   # ===============
   # = Validations =
