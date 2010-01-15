@@ -170,9 +170,7 @@ div#container table tbody tr.story_dropbox td {
 
 /* Product Specific */
 
-a#product_link_add, a#product_link_edit, a#product_link_remove, a#story_link_add, 
-a#story_link_edit, a#story_link_remove, a#task_link_add, a#sprint_link_add,
-a#sprint_link_manage {
+a.button {
   display: block;
   height: 30px;
   color: #fff;
@@ -180,30 +178,12 @@ a#sprint_link_manage {
   line-height: 30px;
   background: #c9af7b;
   margin: 0 0 5px 0; padding: 0;
-}
-
-a#story_link_add, a#task_link_add, a#sprint_link_add {
-  width: 90px;
-  float: left;
-  margin-right: 5px;
-}
-
-a#sprint_link_manage {
   width: 115px;
   float: left;
   margin-right: 5px;
 }
 
-a#product_link_add { width: 140px; }
-
-a#product_link_edit, a#story_link_edit { width: 100px; float: left; }
-
-a#product_link_remove, a#story_link_remove  {
-  width: 120px; float: left;
-  margin-left: 5px;
-}
-
-a#product_link_add:hover, a#product_link_edit:hover, a#product_link_remove:hover, a#sprint_link_manage:hover {
+a.button:hover {
   background: #b0996a;
   text-decoration: none;
 }
