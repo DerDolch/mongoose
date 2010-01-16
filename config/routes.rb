@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :teams
 
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
@@ -9,8 +10,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :user_session
 
-  
   map.resources :products do |p|
+    p.resources :releases
     p.resources :sprints
     p.resources :stories, :collection => { :update_order => :put, :update_sprint_assoc => :put } do |s|
        s.resources :tasks, :collection => { :update_task_status => :put} 

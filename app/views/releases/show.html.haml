@@ -1,0 +1,15 @@
+%p
+  %b
+    Name:
+  =h @release.name
+%p
+  %b
+    Start at:
+  =h @release.start_at
+%p
+  %b
+    Release at:
+  =h @release.release_at
+
+= link_to 'Edit', edit_product_release_path(@product,@release)  |
+= link_to 'Back', product_releases_path(@product)
