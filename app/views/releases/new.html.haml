@@ -2,20 +2,7 @@
   New Release
 
 - form_for(@release, :url => product_releases_path(@product)) do |f|
-  = f.error_messages 
-  %ul
-    %li
-      = label_tag 'name'
-      = f.text_field :name
-
-    %li
-      = label_tag 'start_at'
-      = f.date_select :start_at 
-
-    %li
-      = label_tag 'release_at'
-      = f.date_select :release_at 
-
-  = f.submit 'Update' 
+  = render :partial => 'form', :locals => {:f => f}
+  = f.submit 'Create' 
 
 = link_to 'Back', product_releases_path(@product)

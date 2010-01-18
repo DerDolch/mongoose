@@ -9,7 +9,27 @@
   %strong Description:
   = @product.description
 
-%br/
+%br
+
+%div#tabs
+  %ul
+    %li
+      =link_to 'Backlog', '#backlog'
+    %li
+      =link_to 'Releases', '#releases'
+      
+  %div#backlog
+    %p
+      This is where the backlog would go
+      
+  %div#releases
+    %div#accordion
+      - @product.releases.each do |release|
+        %h3
+          =link_to release.name, '#'
+        %div
+          This is the description of the Release that goes here
+    
 %p
   = link_to 'New Story', new_product_story_path(@product), :id => 'story_link_add', :class => 'button'
   = link_to 'Add Release', new_product_release_path(@product), :id => 'release_link_add', :class => 'button'
@@ -41,4 +61,12 @@
 
 .clear
 
-
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $("#tabs").tabs();
+      $("#accordion").accordion({
+        autoHeight: false,
+        collapsible: true
+      });
+    });

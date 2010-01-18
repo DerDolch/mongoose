@@ -286,5 +286,5 @@ div#menu a
 
 ul.connectedSortable { border: 1px solid #c9af7b; padding: 5px;}
 #unassigned, #assigned { list-style-type: none; margin: 0; margin-right: 10px; }
-#unassigned li, #assigned li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 240px; border: 1px solid #999; }
+#unassigned li, #assigned li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 240px; }
 div#unassigned_users, div#assigned_users { width: 300px; float: left; margin-right: 12px; }

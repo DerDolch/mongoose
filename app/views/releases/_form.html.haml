@@ -1,0 +1,20 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $("#start_date_selector").datepicker();
+      $("#release_date_selector").datepicker();
+    });
+
+= f.error_messages 
+%ul
+  %li
+    = label_tag 'name'
+    = f.text_field :name
+
+  %li
+    = label_tag 'start_at'
+    = f.text_field :start_at, :id => 'start_date_selector'
+
+  %li
+    = label_tag 'release_at'
+    = f.text_field :release_at, :id => 'release_date_selector' 
