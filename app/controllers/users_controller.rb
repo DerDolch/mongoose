@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :login_required, :only => [:create, :new]
+  skip_before_filter :require_user, :only => [:create, :new]
   before_filter :check_if_user_is_developer, :only => [:index, :show, :edit, :destroy]
 
   # GET /users
