@@ -15,21 +15,23 @@
   %ul
     %li
       =link_to 'Backlog', '#backlog'
-    %li
-      =link_to 'Releases', '#releases'
+    - @product.releases.each do |release|
+      %li
+        =link_to release.name, "#release_#{release.id}"
       
   %div#backlog
-    %p
-      This is where the backlog would go
+    %ul.sortable.connectedSortable
+      - @product.stories.each do |story|
+        %li{:id => "story_#{story.id}", :class => "ui-state-highlight"}
+          = story.title
       
-  %div#releases
-    %div#accordion
-      - @product.releases.each do |release|
-        %h3
-          =link_to release.name, '#'
-        %div
-          This is the description of the Release that goes here
-    
+  - @product.releases.each do |release|
+    %div{:id => "release_#{release.id}"}
+      %ul.sortable.connectedSortable
+        - @product.stories.each do |story|
+          %li{:id => "story_#{release.id}_#{story.id}", :class => "ui-state-highlight"}
+            = "#{release.name} => #{story.title}"
+
 %p
   = link_to 'New Story', new_product_story_path(@product), :id => 'story_link_add', :class => 'button'
   = link_to 'Add Release', new_product_release_path(@product), :id => 'release_link_add', :class => 'button'
@@ -64,9 +66,19 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $("#tabs").tabs();
-      $("#accordion").accordion({
-        autoHeight: false,
-        collapsible: true
+      $('.sortable').sortable();
+      var $tabs = $("#tabs").tabs();
+      var $tab_items = $("ul:first li",$tabs).droppable({
+        accept: ".connectedSortable li",
+        hoverClass: "ui-state-hover",
+        drop: function(ev, ui) {
+          var $item = $(this);
+          var $list = $($item.find('a').attr('href')).find('.connectedSortable');
+
+          ui.draggable.hide('slow', function() {
+            $tabs.tabs('select', $tab_items.index($item));
+            $(this).appendTo($list).show('slow');
+          });
+        }
       });
     });
